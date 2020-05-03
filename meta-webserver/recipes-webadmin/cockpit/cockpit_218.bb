@@ -17,6 +17,7 @@ inherit gettext pkgconfig autotools systemd distro_features_check
 
 DEPENDS += "glib-2.0-native intltool-native gnutls"
 DEPENDS += "virtual/gettext json-glib krb5 libpam"
+DEPENDS_append_libc-musl = " fts"
 
 RDEPENDS_${PN} += "glib-networking"
 
@@ -34,6 +35,7 @@ EXTRA_OECONF = " \
     --disable-doc \
     --with-systemdunitdir=${systemd_system_unitdir} \
 "
+EXTRA_OECONF_append_libc-musl = " LIBS=-lfts"
 
 PACKAGECONFIG[pcp] = "--enable-pcp,--disable-pcp,pcp"
 PACKAGECONFIG[dashboard] = "--enable-ssh,--disable-ssh,libssh"
